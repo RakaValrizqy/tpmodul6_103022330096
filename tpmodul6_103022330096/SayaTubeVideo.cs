@@ -18,13 +18,21 @@ namespace tpmodul6_103022330096
 
         public SayaTubeVideo(string title)
         {
-            if (title.Length > 100)
+            try
             {
-                throw new ArgumentException("Judul tidak boleh lebih dari 100 karakter.");
+                if (title.Length > 100)
+                {
+                    throw new ArgumentException("Judul tidak boleh lebih dari 100 karakter.");
+                }
+                this.title = title;
+                this.id = rand.Next(10000, 99999);
+                this.playCount = 0;
             }
-            this.title = title;
-            this.id = rand.Next(10000,99999);
-            this.playCount = 0;
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+
+            }
         }
 
         public void IncreasePlayCount(int jumlah)
